@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
         self.setSignalConnect()
 
     def setUpUI(self):
-        font = QFont("Source Code Pro", 14)
+        font = QFont("微软雅黑", 8)
         self.title = "Sniffer"
         self.setWindowTitle(self.title)
         self.setFixedSize(1000, 800)
@@ -50,8 +50,8 @@ class MainWindow(QMainWindow):
 
         # set HLayoutTop to HwidgetTop
         self.chooseNICLabel = QLabel("选择网卡:")
-        self.chooseNICLabel.setFixedHeight(32)
-        self.chooseNICLabel.setFixedWidth(80)
+        self.chooseNICLabel.setFixedHeight(20)
+        self.chooseNICLabel.setFixedWidth(32)
         self.chooseNICLabel.setAlignment(Qt.AlignCenter)
 
         self.chooseNICComboBox = QComboBox()
