@@ -31,7 +31,33 @@ class MainWindow(QMainWindow, ui.Ui_MainWindow):
         self.pktInfoTable.setColumnWidth(5, 80)
         self.pktInfoTable.setColumnWidth(6, 800)
 
+    def setSifferInfo(self):
+        def setUpSnifferInfos(self):
+            if (len(findalldevs()) != 0):
+                #Windows系统上 待修改
+                self.eth = findalldevs()[0]
+                logger.info("Set interface %s" % self.eth)
+            else:
+                self.eth = None
+                logger.warning("There is no interface on this os")
+            self.protocol = None
+            self.srcIp = None
+            self.srcPort = None
+            self.desIp = None
+            self.desPort = None
+            self.packageInfos = []
+            self.indexes = []
+            self.stop_flag = False  # False: not stop; True: stop
+            self.setfilter_flag = False  # False: have't set filter; True: have be setted
+            self.filterString = ""
+            self.pcapdecoder = PacketDecode()
+
     def signalConnect(self):
+        #to do
+        self.chooseNICComboBox.activated.connect(
+            self.chooseNICHandle
+        )
+        self.startCaptureBtn.connect(self.startCaptureBtnHandle)
 
 
 
