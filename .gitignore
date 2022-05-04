@@ -1,0 +1,7 @@
+/venv
+sniffer.code-workspace
+/__pycache__
+*/.DS_Store
+.DS_Store
+/.idea
+log
