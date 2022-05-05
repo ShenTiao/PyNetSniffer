@@ -47,8 +47,8 @@ class Ui_MainWindow(object):
         font.setFamily("微软雅黑")
         font.setPointSize(9)
         self.chooseNICComboBox.setFont(font)
+        self.chooseNICComboBox.setCurrentText("")
         self.chooseNICComboBox.setObjectName("chooseNICComboBox")
-        self.chooseNICComboBox.addItem("")
         self.TophorizontalLayout.addWidget(self.chooseNICComboBox)
         self.startCaptureBtn = QtWidgets.QPushButton(self.layoutWidget)
         self.startCaptureBtn.setObjectName("startCaptureBtn")
@@ -96,6 +96,7 @@ class Ui_MainWindow(object):
         self.srcIPLabel.setObjectName("srcIPLabel")
         self.MidhorizontalLayout.addWidget(self.srcIPLabel)
         self.srcIPLineEdit = QtWidgets.QLineEdit(self.layoutWidget)
+        self.srcIPLineEdit.setText("")
         self.srcIPLineEdit.setObjectName("srcIPLineEdit")
         self.MidhorizontalLayout.addWidget(self.srcIPLineEdit)
         self.srcPortLabel = QtWidgets.QLabel(self.layoutWidget)
@@ -106,6 +107,7 @@ class Ui_MainWindow(object):
         self.srcPortLabel.setObjectName("srcPortLabel")
         self.MidhorizontalLayout.addWidget(self.srcPortLabel)
         self.srcPortLineEdit = QtWidgets.QLineEdit(self.layoutWidget)
+        self.srcPortLineEdit.setText("")
         self.srcPortLineEdit.setObjectName("srcPortLineEdit")
         self.MidhorizontalLayout.addWidget(self.srcPortLineEdit)
         self.desIPLabel = QtWidgets.QLabel(self.layoutWidget)
@@ -116,6 +118,7 @@ class Ui_MainWindow(object):
         self.desIPLabel.setObjectName("desIPLabel")
         self.MidhorizontalLayout.addWidget(self.desIPLabel)
         self.desIPLineEdit = QtWidgets.QLineEdit(self.layoutWidget)
+        self.desIPLineEdit.setText("")
         self.desIPLineEdit.setObjectName("desIPLineEdit")
         self.MidhorizontalLayout.addWidget(self.desIPLineEdit)
         self.desPortLabel = QtWidgets.QLabel(self.layoutWidget)
@@ -126,6 +129,7 @@ class Ui_MainWindow(object):
         self.desPortLabel.setObjectName("desPortLabel")
         self.MidhorizontalLayout.addWidget(self.desPortLabel)
         self.desPortLineEdit = QtWidgets.QLineEdit(self.layoutWidget)
+        self.desPortLineEdit.setText("")
         self.desPortLineEdit.setObjectName("desPortLineEdit")
         self.MidhorizontalLayout.addWidget(self.desPortLineEdit)
         self.filterBtn = QtWidgets.QPushButton(self.layoutWidget)
@@ -218,8 +222,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Sniffer"))
         self.chooseNIClabel.setText(_translate("MainWindow", "     选择网卡"))
-        self.chooseNICComboBox.setCurrentText(_translate("MainWindow", "TEST"))
-        self.chooseNICComboBox.setItemText(0, _translate("MainWindow", "TEST"))
         self.startCaptureBtn.setText(_translate("MainWindow", "开始抓包"))
         self.stopCapture.setText(_translate("MainWindow", "停止抓包"))
         self.clearDataBtn.setText(_translate("MainWindow", "清空数据"))
@@ -233,13 +235,9 @@ class Ui_MainWindow(object):
         self.proTypeChooseBox.setItemText(4, _translate("MainWindow", "TCP OR UDP"))
         self.proTypeChooseBox.setItemText(5, _translate("MainWindow", "IP ONLY"))
         self.srcIPLabel.setText(_translate("MainWindow", "源IP地址"))
-        self.srcIPLineEdit.setText(_translate("MainWindow", "112.123.414.212"))
         self.srcPortLabel.setText(_translate("MainWindow", "源端口"))
-        self.srcPortLineEdit.setText(_translate("MainWindow", "1234"))
         self.desIPLabel.setText(_translate("MainWindow", "目的IP地址"))
-        self.desIPLineEdit.setText(_translate("MainWindow", "112.123.414.212"))
         self.desPortLabel.setText(_translate("MainWindow", "目的端口"))
-        self.desPortLineEdit.setText(_translate("MainWindow", "3123"))
         self.filterBtn.setText(_translate("MainWindow", "设置过滤"))
         self.analysisLabel.setText(_translate("MainWindow", "流量统计"))
         self.ProtoCntBnt.setText(_translate("MainWindow", "协议统计"))
@@ -265,9 +263,9 @@ class Ui_MainWindow(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'微软雅黑\',\'微软雅黑\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'微软雅黑\';\">TEST</span></p></body></html>"))
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.hexDumpWin.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'微软雅黑\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">TEST</p></body></html>"))
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))

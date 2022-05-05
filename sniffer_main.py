@@ -16,8 +16,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         logger.info("Sniffer is starting")
-        self.signalConnect()
+        self.setupUi(self)
         self.setSifferInfo()
+        self.signalConnect()
 
         #分组消息窗口默认固定
         self.pktInfoTable.setColumnWidth(0, 50)
@@ -27,6 +28,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.pktInfoTable.setColumnWidth(4, 60)
         self.pktInfoTable.setColumnWidth(5, 80)
         self.pktInfoTable.setColumnWidth(6, 800)
+
+        devs = findalldevs()
+        self.chooseNICComboBox.addItems(devs)
 
     def setSifferInfo(self):
         if (len(findalldevs()) != 0):
@@ -99,31 +103,31 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         font = QFont("微软雅黑", 10)
         tmp = QTableWidgetItem(str(count + 1))
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 0, tmp)
         tmp = QTableWidgetItem(info['time'])
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 1, tmp)
         tmp = QTableWidgetItem(info['Source'])
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 2, tmp)
         tmp = QTableWidgetItem(info['Destination'])
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 3, tmp)
         tmp = QTableWidgetItem(info['Protocol'])
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 4, tmp)
         tmp = QTableWidgetItem(str(info['len']))
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 5, tmp)
         tmp = QTableWidgetItem(info['info'])
         tmp.setFont(font)
-        self.packageInfosTable.setItem(
+        self.pktInfoTable.setItem(
             count, 6, tmp)
 
     def stopBtnHandle(self):
@@ -293,9 +297,9 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         indexs = tmp
 
         self.indexes = indexs
-        count = self.packageInfosTable.rowCount()
+        count = self.pktInfoTable.rowCount()
         for i in range(count - 1, -1, -1):
-            self.packageInfosTable.removeRow(i)
+            self.pktInfoTable.removeRow(i)
         self.hexDumpWin.clear()
         self.pktDetailWin.clear()
         for i in self.indexes:
@@ -304,7 +308,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def ProtoCntBntHandle(self):
         if(self.packageInfos == []):
             QMessageBox.warning(self, "Warning",
-                                "当前为Pcap包",
+                                "当前无Pcap包",
                                 QMessageBox.Yes,
                                 QMessageBox.No)
             return
