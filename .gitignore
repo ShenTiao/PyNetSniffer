@@ -1,6 +1,3 @@
-### Example user template template
-### Example user template
-
 # IntelliJ project files
 .idea
 *.iml
@@ -9,4 +6,5 @@ gen
 log
 ToDo.md
 sniffer.py
+__pycache__
 
