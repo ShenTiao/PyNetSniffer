@@ -1,3 +1,5 @@
+import os
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -177,32 +179,66 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         if (file == ''):
             logger.warning("Load file name is None")
             return
-        self.clearBtnHandle()
+        self.clearDataBtnHandle()
         pkts = rdpcap(file)
         for i in range(len(pkts)):
-            self.deal_package(pkts[i])
+            self.dealWithPkt(pkts[i])
         logger.info("Load package done")
+
+    #获取IP
+    def get_ip(self, ip):
+        ip = ip.replace("\r", "")
+        ip = ip.replace("\t", "")
+        ip = ip.replace("\n", "")
+        ip = ip.replace(" ", "")
+        if(ip == ""):
+            return ""
+        trueIp = re.search(
+            r'^(([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])\.){3}([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])$', ip)
+        if(trueIp == None):
+            QMessageBox.warning(self, "警告", "ip格式有误，请重新输入",
+                                QMessageBox.Yes, QMessageBox.Yes)
+            return None
+        return trueIp.string
+
+    #获取端口
+    def get_port(self, port):
+        port = port.replace("\r", "")
+        port = port.replace("\t", "")
+        port = port.replace("\n", "")
+        port = port.replace(" ", "")
+        if(port == ""):
+            return -1
+        try:
+            port = int(port)
+            if(port >= 0 and port <= 65535):
+                return port
+        except:
+            QMessageBox.warning(self, "警告", "端口格式有误，请重新输入",
+                                QMessageBox.Yes, QMessageBox.Yes)
+            return None
+        return -1
 
     def filterBtnHandle(self):
         # 1.filter the data showed on the table
         # 2.set the para for sniffer
-        d = {'all': "", 'arp only': "arp", 'tcp only': "tcp",
-             'udp only': "udp", 'tcp or udp': '(tcp or udp)', 'ip only': "ip"}
-        self.protocol = d[self.protocolComboBox.currentText()]
+        d = {'ALL': "", 'ARP ONLY': "arp", 'TCP ONLY': "tcp",
+          'UDP ONLY': "udp", 'TCP OR UDP': '(tcp or udp)', 'IP ONLY': "ip"}
+        self.protocol = d[self.proTypeChooseBox.currentText()]
         logger.info("Set protocol: %s" % self.protocol)
         tmp_srcIp = ""
         tmp_srcPort = -1
         tmp_desIp = ""
         tmp_desPort = -1
-        tmp_srcIp = self.get_ip(self.srcIpLineEdit.text())
-        if (tmp_srcIp == None):
+        tmp_srcIp = self.get_ip(self.srcIPLineEdit.text())
+        if tmp_srcIp == None:
             logger.info("Set srcIp error" % self.srcIp)
             return
         tmp_srcPort = self.get_port(self.srcPortLineEdit.text())
         if (tmp_srcPort == None):
             logger.info("Set srcPort error" % self.srcIp)
             return
-        tmp_desIp = self.get_ip(self.desIpLineEdit.text())
+        tmp_desIp = self.get_ip(self.desIPLineEdit.text())
         if (tmp_desIp == None):
             logger.info("Set desIp error" % self.srcIp)
             return
@@ -233,29 +269,29 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         pkts = []
         for i in range(len(self.packageInfos)):
             pkts.append(self.packageInfos[i]['pkt'])
-        # d = {'all': "", 'arp only': "arp", 'tcp only': "tcp",
-        #     'udp only': "udp", 'tcp or udp': '(tcp or udp)', 'ip only': "ip"}
+        # d = {'ALL': "", 'ARP ONLY': "arp", 'TCP ONLY': "tcp",
+        #      'UDP ONLY': "udp", 'TCP OR UDP': '(tcp or udp)', 'IP ONLY': "ip"}
         indexs = [i for i in range(len(pkts))]
         tmp = []
-        if (self.protocol == ""):
+        if self.protocol == "":
             tmp = indexs
-        elif (self.protocol == 'arp'):
+        elif self.protocol == 'ARP':
             for i in indexs:
-                if ("ARP" in pkts[i].summary()):
+                if "ARP" in pkts[i].summary():
                     tmp.append(i)
-        elif (self.protocol == 'tcp'):
+        elif self.protocol == 'TCP':
             for i in indexs:
-                if (pkts[i].haslayer(TCP)):
+                if pkts[i].haslayer(TCP):
                     tmp.append(i)
-        elif (self.protocol == 'udp'):
+        elif self.protocol == 'UDP':
             for i in indexs:
-                if (pkts[i].haslayer(UDP)):
+                if pkts[i].haslayer(UDP):
                     tmp.append(i)
-        elif (self.protocol == '(tcp or udp)'):
+        elif self.protocol == '(TCP or UDP)':
             for i in indexs:
                 if (pkts[i].haslayer(UDP) or pkts[i].haslayer(TCP)):
                     tmp.append(i)
-        elif (self.protocol == 'ip'):
+        elif self.protocol == 'IP':
             for i in indexs:
                 if (pkts[i].haslayer(IP)):
                     tmp.append(i)
@@ -321,9 +357,14 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         for i, j in datas.items():
             data_byte.append([i, j])
         pie = pie_base(data_frames, data_byte, "协议统计")
-        pie.render("./res/htmls/render.html")
+        pie.render()
+        pie.render("./res/html/render.html")
         view = QWebEngineView()
-        view.load(QUrl("file:///%s/res/htmls/render.html" % (os.getcwd())))
+        # Windows上路径修改
+        cwd = os.getcwd()
+        cwd = cwd.replace('\\', '/')
+        url = "file:///" + cwd + "/res/html/render.html"
+        view.load(QUrl(str(url)))
         dialog = QDialog(self)
         dialog.setFixedHeight(600)
         dialog.setFixedWidth(1000)
@@ -350,9 +391,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         data_bytes = [[ip, byte]
                       for ip, byte in zip(d['in_keyl'], d['in_len'])]
         pie = pie_base(data_frames, data_bytes, "流入流量统计")
-        pie.render("./res/htmls/render.html")
+        pie.render("./res/html/render.html")
         view = QWebEngineView()
-        view.load(QUrl("file:///%s/res/htmls/render.html" % (os.getcwd())))
+        # Windows上路径修改
+        cwd = os.getcwd()
+        cwd = cwd.replace('\\', '/')
+        url = "file:///" + cwd + "/res/html/render.html"
+        view.load(QUrl(url))
         dialog = QDialog(self)
         dialog.setFixedHeight(600)
         dialog.setFixedWidth(1000)
@@ -379,9 +424,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         data_bytes = [[ip, byte]
                       for ip, byte in zip(d['out_keyl'], d['out_len'])]
         pie = pie_base(data_frames, data_bytes, "流出流量统计")
-        pie.render("./res/htmls/render.html")
+        pie.render("./res/html/render.html")
         view = QWebEngineView()
-        view.load(QUrl("file:///%s/res/htmls/render.html" % (os.getcwd())))
+        # Windows上路径修改
+        cwd = os.getcwd()
+        cwd = cwd.replace('\\', '/')
+        url = "file:///" + cwd + "/res/html/render.html"
+        view.load(QUrl(url))
         dialog = QDialog(self)
         dialog.setFixedHeight(600)
         dialog.setFixedWidth(1000)
@@ -407,9 +456,12 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         in_y = [in_data[k] for k in in_data.keys()]
         out_y = [out_data[k] for k in out_data.keys()]
         line = line_base(in_x, in_y, out_y)
-        line.render("./res/htmls/render.html")
+        line.render("./res/html/render.html")
         view = QWebEngineView()
-        view.load(QUrl("file:///%s/res/htmls/render.html" % (os.getcwd())))
+        cwd = os.getcwd()
+        cwd = cwd.replace('\\', '/')
+        url = "file:///" + cwd + "/res/html/render.html"
+        view.load(QUrl(url))
         dialog = QDialog(self)
         dialog.setFixedHeight(600)
         dialog.setFixedWidth(1000)
@@ -465,13 +517,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         row = index.row()
         row = self.indexes[row]
         self.hexDumpWin.setText(
-            hexdump(self.packageInfos[row]['pkt']), dump=True
-        )
+            hexdump(self.packageInfos[row]['pkt'], dump=True))
         data = ""
         pktinfo = self.packageInfos[row]
         data += "Frame %d:\n\tlength: %d bytes\n\tinterface: %s\n" % (
-            index.row() + 1, pktinfo['info']['len'], pktinfo['eth']
-        )
+            index.row() + 1, pktinfo['info']['len'], pktinfo['eth'])
         data += PktInfoGet(pktinfo['pkt'])
         self.pktDetailWin.setText(data)
 
@@ -493,11 +543,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         logger.info(logger.info("host_ip: %s", host_ip))
         d = extractHtml(pkts, host_ip)
         for i in range(0, len(d)):
-            if(d[i]['ip_port'].startswith(ip) and d[i]['ip_port'].split(":")[1] == str(pkt.dport)):
-                with open("./res/htmls/render.html", "w") as f:
+            if d[i]['ip_port'].startswith(ip) and d[i]['ip_port'].split(":")[1] == str(pkt.dport):
+                with open("./res/html/render.html", "w") as f:
                     f.write(d[i]['data'])
                 QMessageBox.information(
-                    self, "提醒", "网页存储在/res/htmls/render.html", QMessageBox.Yes, QMessageBox.Yes)
+                    self, "提醒", "网页存储在/res/html/render.html", QMessageBox.Yes, QMessageBox.Yes)
                 view = QPlainTextEdit()
                 font = QFont("微软雅黑", 12)
                 view.setFont(font)
@@ -510,7 +560,6 @@ class MainWindow(Ui_MainWindow, QMainWindow):
                 dialog.setLayout(l)
                 dialog.show()
                 return
-                # 124.16.77.200:59307:HTTP
         QMessageBox.information(
             self, "提醒",
             "未提取到http内容",
