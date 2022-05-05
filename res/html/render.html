@@ -1,0 +1,185 @@
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8"> <![endif]-->
+<!--[if IE 9]> <html class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+<head>
+	<title>SEP 教育业务接入平台</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=IE9;IE=IE8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- // base css -->
+    <link href="/resources/stylelib/base.css" rel="stylesheet" type="text/css" />
+
+    <!-- // plugins css -->
+    <link href="/resources/stylelib/plugins/font-awesome/font-awesome.css" rel="stylesheet" type="text/css" />
+
+    <!-- // theme css -->
+    <link href="/resources/stylelib/theme_wblue/screen.css" rel="stylesheet" type="text/css" />
+           
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/resources/stylelib/plugins/html5shiv.js"></script>
+    <![endif]-->
+    <link href="/resources/stylelib/theme_default/applogin.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+</head>
+<body>
+	<div id="header" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a id="logo" class="brand" href="http://www.ucas.ac.cn" title="跳转至中国科学院大学首页">
+                  <img src="/resources/images/logo.png"/>
+                </a><!--//logo:end-->
+            </div><!--//container:end-->
+        </div><!--//container-fluid:end-->
+    </div><!--//header:end-->
+        <div id="main-content" class="m-fullpage">
+            <div class="container-fluid">
+
+                <div class="row-fluid">
+                    <div class="span6 offset1 hidden-phone">
+                        <div class="space20"></div>
+                        <h3 class="m-applogin-title"><span>教育业务管理平台</span></h3>
+                        <div class="m-applogin-list">
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="mal-box">
+                                        <img src="/resources/stylelib/images/icon/icon-server-discipline.png">
+                                        <h4>学科建设</h4>
+                                        <p>学科专业点申报与评审，培养点评估申报与评审，学科点数据维护</p>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="mal-box">
+                                        <img src="/resources/stylelib/images/icon/icon-server-teacher.png">
+                                        <h4>教师管理</h4>
+                                        <p>教师（导师）信息备案、教师资格证办理、教师数据维护 </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="mal-box">
+                                        <img src="/resources/stylelib/images/icon/icon-server-rs.png">
+                                        <h4>招生管理</h4>
+                                        <p>博士网报、招生专业目录维护、成绩管理、复试录取管理 </p>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="mal-box">
+                                        <img src="/resources/stylelib/images/icon/icon-server-register.png">
+                              ame" name="userName" value="" placeholder="请输入您的用户名"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="pwd">密码</label>
+                                    <div class="controls">
+                                        <div class="input-icon span12">
+                                            <span class="add-on"><i class="icon-key"></i> </span>
+                                            <input class="span12" type="password" id="pwd" name="pwd" placeholder="输入您的密码" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                
+                                	<div class="control-group">
+	                                    <label class="control-label" for="pwd">验证码</label>
+	                                    <div class="controls">
+	                                        <div class="input-icon span12">
+	                                            <input type="text" name="certCode" placeholder="输入验证码"/>
+	                                            <img id="code" src="/changePic"><a href="javascript:changeimg()">看不清，换一张 </a>
+	                                        </div>
+	
+	                                    </div>
+	                                </div>
+                                
+                                <div class="control-group">
+                                    <div class="controls">
+                                    	
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                  <button type="submit" id="sb" name="sb" value="sb" class="btn btn-large btn-danger btn-block">登 录</button>
+                                </div>
+                                <div style="color:#00F">
+                                	新生首次登录时，用户名为学号，密码为身份证号（如有字母请大写）
+                                </div>
+                                <div class="blbr-link">
+                                    <a href="/help/forgetPwd" class="b-sepinputcolor" style="text-decoration:underline;">找回用户名和密码</a>
+                                </div>
+                                <!-- <div class="blbr-link">
+                                    <a href="http://jwxk.ucas.ac.cn/dlogin" class="b-sepinputcolor"><font color="blue">选课的同学请点击这里进入，用户名是学号，密码是身份证号码</font></a>
+                                </div> -->
+                            </form><!--//#appform:end-->
+
+                            <h3 class="m-applogin-title"><span>相关链接</span></h3>
+                            <ul class="m-applogin-slink">
+                                <li><a href="http://www.moe.edu.cn/"><i class="icon-expand"></i>  中华人民共和国教育部</a></li>
+                                <li><a href="http://www.csadge.edu.cn/"><i class="icon-expand"></i>  中国学位与研究生教育学会</a></li>
+                                <li><a href="http://www.meng.edu.cn/"><i class="icon-expand"></i>  全国工程硕士研究生教育网</a></li>
+                                <li><a href="http://www.nlc.gov.cn/"><i class="icon-expand"></i>  中国国家图书馆</a></li>
+                                <li><a href="http://www.las.ac.cn/"><i class="icon-expand"></i>  中国科学院国家科学图书馆</a></li>
+                                <li><a href="http://www1.csdb.cn/"><i class="icon-expand"></i>  中国科学院科学数据库</a></li>
+                                <li><a href="http://www.escience.gov.cn/"><i class="icon-expand"></i>  中国科技资源共享网</a></li>
+                                <li><a href="http://www.escience.gov.cn/"><i class="icon-expand"></i>  中国科普博览</a></li>
+                            </ul>
+
+                            <h3 class="m-applogin-title"><span>相关下载</span></h3>
+                            <ul class="m-applogin-slink">
+                                <li><a target="_blank" href="/resources/doc/User_Service_Guide[YJS].pdf"><i class="icon-expand"></i>  教育云服务指南（研究生）</a></li>
+                                <li><a target="_blank" href="/resources/doc/User_Service_Guide[BKS].pdf"><i class="icon-expand"></i>  教育云服务指南（本科生）</a></li>
+                                <li><a target="_blank" href="/resources/doc/User_Service_Guide[JS].pdf"><i class="icon-expand"></i>  教育云服务指南（教师）</a></li>
+                                <li><a target="_blank" href="http://inc.ucas.ac.cn/home/info/3a25bf0a-1c49-4c5a-b302-a2103e353a9f"><i class="icon-expand"></i>  教育云服务指南（研究所）</a></li>
+                                <li><a target="_blank" href="/resources/doc/User_rights_management_regulations[UCAS].pdf"><i class="icon-expand"></i>  用户权限管理规定【教育业务接入平台】</a></li>
+                                <li><a target="_blank" href="/resources/doc/SEP_FAQ[UCAS].pdf"><i class="icon-expand"></i>  常见问题 【教育业务接入平台】</a></li>
+                                <li><a target="_blank" href="https://zhaosheng.gucas.ac.cn/zhaosheng/login/cn/files/eps1k_pki_full_SimpChinese.zip"><i class="icon-expand"></i>  招生系统密钥驱动</a></li>
+                            </ul>
+
+                        </div><!--//b-fs-side:end-->
+                    </div><!--//span3:end-->
+                </div>
+
+            </div><!--//container-fluid:end-->
+        </div><!--//main-content:end-->
+        <div id="footer">
+		    <div class="container-fluid">
+		      版权所有 &copy; 中国科学院大学 地址: 北京市石景山区玉泉路19号(甲) 邮编: 100049 &nbsp;&nbsp;<a target="_blank" href="http://www.miibeian.gov.cn/">京ICP备07017956号</a>
+		    </div>
+		</div><!--//footer:end-->
+        <!--script for this page only-->
+		<script type="text/javascript">
+            
+            	
+            	
+					document.getElementById("userName").focus();
+            	
+            
+			
+			
+	    </script>
+	     <script type="text/javascript">
+
+		function changeimg()
+		
+		{
+		
+		
+		var myimg = document.getElementById("code"); 
+		now = new Date(); 
+		myimg.src="/changePic?code="+now.getTime();
+		} 
+		</script>
+        <!--// JS End -->
+    </body>
+</html>
+
