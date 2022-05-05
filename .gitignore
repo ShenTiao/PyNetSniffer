@@ -1,7 +1,12 @@
-/venv
-sniffer.code-workspace
-/__pycache__
-*/.DS_Store
-.DS_Store
-/.idea
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
 log
+ToDo.md
+sniffer.py
+
