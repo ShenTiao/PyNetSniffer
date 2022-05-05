@@ -3,3 +3,4 @@ scapy~=2.4.5
 geoip2~=4.5.0
 pyecharts~=1.9.1
 QtPy~=2.0.1
+pcap-ct==1.2.3b12
