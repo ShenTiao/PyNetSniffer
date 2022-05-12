@@ -50,7 +50,12 @@ UI使用Qt designer设计并使用qtuic生成python文件，UI源文件在目录
 归属地：
 
 ![](https://s2.loli.net/2022/05/07/6KRIHe3ALhBVjw1.png)
-
+## 使用
+```
+git clone https://github.com/ShenTiao/PyNetSniffer
+pip install requirements.txt
+python sniffer_main.py
+```
 ### 参考
 ***
 [scapyshark](https://github.com/bannsec/scapyshark)
