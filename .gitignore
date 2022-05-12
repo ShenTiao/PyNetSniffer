@@ -5,4 +5,7 @@ out
 gen
 log
 __pycache__
-
+render.html
+build
+dist
+sniffer_main.spec
