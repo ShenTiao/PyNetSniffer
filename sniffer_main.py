@@ -271,7 +271,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         #      'UDP ONLY': "udp", 'TCP OR UDP': '(tcp or udp)', 'IP ONLY': "ip"}
         indexs = [i for i in range(len(pkts))]
         tmp = []
-        if self.protocol == "":
+        if self.protocol == None:
             tmp = indexs
         elif self.protocol == 'ARP':
             for i in indexs:
